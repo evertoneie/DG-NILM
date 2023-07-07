@@ -9,6 +9,21 @@ Figure 1 - Single-Line diagram of our experimental setup
 
 Each acquisition window (AW) has 16s of sampled variables at 1000kHz, totalizing 16000 samples per AW. We separated the entire dataset into two subsets: Aggregated (with overlapped appliances) and Individual (without overlapped appliances). For each AW, we annotated the state (turned on or turned off) of a PV inverter connected to the Point of Commum Connection (PCC).
 
+## Download Dataset
+
+Click [![HERE](https://img.shields.io/badge/Google%20Drive-Dataset-blue?logo=google-drive)](https://drive.google.com/drive/folders/1uDjzmx8DErOiJZqVZp4nAGHf40W8LSkb)  to access the download link of the entire RAW dataset and the pre-processed. 
+
+The Dataset folder has two subfolders: "RAW" and "preprocessed_data". "RAW" contains the original data collected from the sensor boards (SB), with no scaling or any signal processing. "pre_processed_data", on the other hand, contains chunks of each original AW, taken every 1000 consecutive non-changed labels interval of a RAW acquisition window. 
+
+RAW also has two subfolders: "with_DG" and "without_DG." The "with_DG" subfolder contains acquisition windows taken with the presence of Photovoltaic (PV) Distributed Generation (DG), and the "without_DG" contains acquisition windows only with aggregated loads, without PV DG. 
+
+Below we detail the files for each of these cases:
+
+- `./DG-NILM-V1/Dataset/RAW/aggregated/with_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_agg` indicating that it is aggregated raw data, and `with_DG` indicating that this is the case *with* DG
+- `./DG-NILM-V1/Dataset/RAW/aggregated/without_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_agg` indicating that it is aggregated raw data, and `without_DG` indicating that this is the case *without* DG
+- `./DG-NILM-V1/Dataset/RAW/individual/with_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_ind` indicating that it is individual raw data, and `with_DG` indicating that this is the case *with* DG
+- `./DG-NILM-V1/Dataset/RAW/individual/without_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_ind` indicating that it is individual raw data, and `without_DG` indicating that this is the case *without* DG
+
 ### Parameters selection for data sampling
 
 The main parameters for data sampling are:
