@@ -84,6 +84,7 @@ where `labels_out` is a column array obtained from the first column of the RAW `
 3. `./DG-NILM-V1/Dataset/pre_processed_data/individual_with_DG`: Case without loads overlapping and with DG generation.
 4. `./DG-NILM-V1/Dataset/pre_processed_data/individual_without_DG`: Case without loads overlapping and without DG generation. 
 
+Each of the folders `1-4` above contains two files: `i1_out_entire.hdf5` and `i2_out_entire.hdf5`. `i1_out_entire.hdf5` and `i2_out_entire.hdf5` contains chunks of 1000 continuous non-changed labels samples obtained from RAW data. We use THIS notebook to pre-process the RAW data and obtain such chunks. `i1_out_entire.hdf5` contains the *aggregated* chunks and `i2_out_entire.hdf5` contains the *inverter* chunks.
 
 ### Parameters selection for data sampling
 
