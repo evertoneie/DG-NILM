@@ -133,5 +133,11 @@ We prepared three classification experiments with DG-NILM-V1: *Inverter Detectio
 
 [Methods](../TSG2023/Methods) folder contains the implementations of IDE, LIDE, and LDE considering four state-of-the-art approaches: Sequencer [1], InceptionTime [2], DeepDFML [3] and ST-NILM [4]. We use [TSAI](https://github.com/timeseriesAI/tsai) to implement Sequencer and Inception, [this repository](https://github.com/LucasNolasco/DeepDFML-NILM) to implement DeepDFML and [this repository](https://github.com/LucasNolasco/ST-NILM) to implement ST-NILM.
 
+Before reproducing the experiments LDE, LIDE, and IDE, please follow these steps:
 
+1. First, [download the branch](../TSG2023/) and extract the content;
+2. Download the segments [through the link](https://drive.google.com/drive/folders/11wv6WqpKKDCWrLOa3dBvuqClEdCyC2KZ?usp=sharing);
+3. Place the segments folder into the TST2023 branch root folder;
+4. Verify and adequate all the addresses pointing to the segments;
+5. Install all the dependencies cited in [requirements.txt](../TSG2023/requeriments.txt) file
 
