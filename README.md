@@ -109,9 +109,11 @@ Figure 2a shows in green two consecutive acquisition windows. In green, we show 
 Figure 2b shows an example of a set of switching patterns for four relays (switches a, b, c, and d), each controlling an individual appliance. Our hardware controls each switch with a predetermined switching interval. Figure 2b is a detail of the switching patterns inside a particular acquisition window (interval AWTI). We show here four switch states waveforms, each with a different color. Let switch A be the pink waveform, switch B the blue, switch C the yellow, and switch D the grey. Note that the total time interval showed in Figure 2b is $AWTI$, being Figure 2b a zoomed version of Figure 2a. In figure 2b, we represent each of these switching intervals with different colors: pink for switch a, blue for switch b, yellow for switch c, and grey for switch d.  
 
 
-Figure 2a
+![Figure 2a - Typical Switching Times Among Acquisition Windows in DG-NILM.](parameters_a.png)
+Figure 2a - Typical Switching Times Among Acquisition Windows in DG-NILM
 
-figure 2b
+![Figure 2a - Typical Switching Times Inside a Particular Acquisition Window in DG-NILM.](parameters_b.png)
+Figure 2b - Typical Switching Times Inside a Particular Acquisition Window in DG-NILM
 
 Our hardware allows us to choose the instants at which each load is triggered within an AW. This flexibility allows us to assemble the load combinations we want. Some possible examples are:
 
@@ -120,7 +122,6 @@ Our hardware allows us to choose the instants at which each load is triggered wi
 - Aggregate triggering with a finite set of different intervals (TDI):} In this case, we choose a finite set of switching patterns for the relays, generating a finite set of different switching patterns for different AWs;
 - Aggregate triggering with a random set of different intervals (TRI):} In this case, we choose a random switching pattern for each load, and there is an infinite set of possible combinations between these patterns, generating all AW with different switching patterns.
 
-### Electrical appliances choosing
 
 
 
