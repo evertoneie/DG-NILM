@@ -29,10 +29,10 @@ Below we detail the files for each of these cases:
 Each RAW aggregated or individual subfolder file contains a matrix with `n_samples = 16000` lines and three columns:
 
 * Each line is one acquisition sample;
-* The first column is an integer number that represents the status (on or off) for each appliance. One can get the binary label of each appliance by simply converting the integer value of the first column to binary;
+* The first column is an integer number representing each appliance's status (on or off). One can get the binary label of each appliance by simply converting the integer value of the first column to binary;
 * The second column contains the ADC value of the Aggregated Current (`I_agg`);
 * The third column contains the ADC value of the Inverter Current (`I_inv`);
-* One can obtain the Inverter Label by simply considering the condition pointed by the RAW subfolder name, `with_DG` or `without_DG`.
+* One can obtain the Inverter Label by considering the condition pointed by the RAW subfolder name, `with_DG` or `without_DG`.
 
 
 #### Detail of the labels applied to each electrical load
@@ -42,7 +42,7 @@ We choose four electrical loads of different natures to compose our dataset. We 
 - We choose an **electric iron** with a nominal power of 900W. The electric iron is a predominantly linear (resistive) load, prevalent in most residential consumption units, and with relatively high power (above 500W);
 - Single **Phase Induction Motor**: We chose a 0.5hp single-phase motor, with capacitor start. This type of load has a non-linear behavior caused by the magnetic characteristics of the iron and the air gap, resulting in a specific power signature. In Brazilian homes, it is common for this type of load to be used in washing machines that do not use frequency inverters;
 - **Driller + Transformer**: We built an arrangement by connecting a driller Bosch 3601B185D0 with 127V nominal voltage to a single-phase 127V\/220V transformer. The drill has a universal motor (DC motor in series configuration). This arrangement, with a total nominal power of 700W, has a non-linear behavior caused both by the motor action and by the magnetic saturation and in-rush current of the transformer;
-- **Dimmer**: Bearing in mind that more than 70\% of Brazilian homes have an electric shower, that an electric shower is a resistive load, and that the temperature control of these devices is usually carried out employing thyristor switching systems, we build an arrangement of resistive loads commanded by a dimmer. We control the average power delivered to the resistive array through the dimmer firing angle. This adjustment leads to a resistive behavior and adds considerable harmonic content to the residential network.
+- **Dimmer**: Bearing in mind that more than 70\% Brazilian homes have an electric shower, that an electric shower is a resistive load, and that the temperature control of these devices is usually carried out employing thyristor switching systems, we build an arrangement of resistive loads commanded by a dimmer. We control the average power delivered to the resistive array through the dimmer firing angle. This adjustment leads to a resistive behavior and adds considerable harmonic content to the residential network.
 
 In this readme file, we consider the following:
 
@@ -85,11 +85,11 @@ where `labels_out` is a column array obtained from the first column of the RAW `
 4. `./DG-NILM-V1/Dataset/pre_processed_data/individual_without_DG`: Case without loads overlapping and without DG generation. 
 
 Each of the folders `1-4` above contains two files: `i1_out_entire.hdf5` and `i2_out_entire.hdf5`. `i1_out_entire.hdf5` and `i2_out_entire.hdf5` contains chunks of 1000 continuous non-changed labels samples obtained from RAW data. We use [this code](./p1_pre_processing_all_folder.py)
-  to pre-process the RAW data and obtain such chunks. `i1_out_entire.hdf5` contains the *aggregated* chunks and `i2_out_entire.hdf5` contains the *inverter* chunks.
+  to pre-process the RAW data and obtain such chunks. `i1_out_entire.hdf5` contains the *aggregated* chunks, and `i2_out_entire.hdf5` contains the *inverter* chunks.
 
 ### Scale factor to convert RAW data to real-world values
 
-RAW data values are at the range `0-10^12`, corresponding to the ADC's 12 bits resolution. To get real-world-ranged current variables, one must remove the offset (the half of `10^12`) and multiply the result by the *scaler* value.
+RAW data values are at `0-10^12`, corresponding to the ADC's 12 bits resolution. To get real-world-ranged current variables, one must remove the offset (the half of `10^12`) and multiply the result by the *scaler* value.
 
 - *Scaler* for `I_agg`: `k_agg = 0.036450093058151`
 - *Scaler* for `I_inv`: `k_inv = 0.018739120738522`
@@ -107,7 +107,7 @@ Figure 2 shows a set of typical waveforms for two consecutive AWs, highlighting 
 
 Figure 2a shows in green two consecutive acquisition windows. In green, we show two acquisition windows whose start point is separated by a $\Delta t$ time interval. In red, we show an example of the state transition in PV inverter conditions, from on to off, if $t>t_{inv}$. In seconds, the duration of a particular acquisition window is $AWTI$. Two consecutive AW start=points are separated by an interval of $\Delta t = t_2=t_{ini}$ seconds. In Figure 2a, $AWTI = t_1 - t_{ini}=t_3-t_2$. We also show in Figure 2a, in red, an example of the interval $t_{inv}-t_{ini}$ in which the PV inverter is turned on (generating energy). After the instant $t=t_{inv}$, the PV inverter is off (not generating energy). For our example case, in which we show two AW, we have the inverter on (*on* state) in the first AW (left green area) and off (*off* state) in the second AW (right green area ). 
 
-Figure 2b shows an example of a set of switching patterns for four relays (switches a, b, c, and d), each controlling an individual appliance. Our hardware controls each switch with a predetermined switching interval. Figure 2b is a detail of the switching patterns inside a particular acquisition window (interval AWTI). We show here four switch states waveforms, each with a different color. Let switch A be the pink waveform, switch B the blue, switch C the yellow, and switch D the grey. Note that the total time interval shown in Figure 2b is $AWTI$, being Figure 2b a zoomed version of Figure 2a. In figure 2b, we represent each of these switching intervals with different colors: pink for switch a, blue for switch b, yellow for switch c, and grey for switch d.  
+Figure 2b shows an example of a set of switching patterns for four relays (switches a, b, c, and d), each controlling an individual appliance. Our hardware controls each switch with a predetermined switching interval. Figure 2b details the switching patterns inside a particular acquisition window (interval AWTI). We show here four switch states waveforms, each with a different color. Let switch A be the pink waveform, switch B the blue, switch C the yellow, and switch D the grey. Note that the total time interval shown in Figure 2b is $AWTI$, being Figure 2b a zoomed version of Figure 2a. In Figure 2b, we represent each switching interval with different colors: pink for switch a, blue for switch b, yellow for switch c, and grey for switch d.  
 
 
 ![Figure 2a - Typical Switching Times Among Acquisition Windows in DG-NILM.](parameters_a.png)
@@ -119,15 +119,6 @@ Figure 2b - Typical Switching Times Inside a Particular Acquisition Window in DG
 Our hardware allows us to choose the instants at which each load is triggered within an AW. This flexibility allows us to assemble the load combinations we want. Some possible examples are:
 
 - Sequential triggering of individual loads (TIL):} In this case, we choose a switching interval for each load so that only one load is activated at a time, without overlapping more than one load at the same time;
-- Aggregate triggering with fixed intervals (TFI):} In this case, we choose fixed switching intervals and always starting at the same times for all switches, with overlapping loads;
+- Aggregate triggering with fixed intervals (TFI):} In this case, we choose fixed switching intervals and always start at the exact times for all switches with overlapping loads;
 - Aggregate triggering with a finite set of different intervals (TDI):} In this case, we choose a finite set of switching patterns for the relays, generating a finite set of different switching patterns for different AWs;
 - Aggregate triggering with a random set of different intervals (TRI):} In this case, we choose a random switching pattern for each load, and there is an infinite set of possible combinations between these patterns, generating all AW with different switching patterns.
-
-
-
-
-
-
-
-
-
