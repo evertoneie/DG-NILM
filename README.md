@@ -139,5 +139,5 @@ Before reproducing the experiments LDE, LIDE, and IDE, please follow these steps
 2. Download the segments [through the link](https://drive.google.com/drive/folders/11wv6WqpKKDCWrLOa3dBvuqClEdCyC2KZ?usp=sharing);
 3. Place the segments folder into the TST2023 branch root folder;
 4. Verify and adequate all the addresses pointing to the segments;
-5. Install all the dependencies cited in [requirements.txt](../TSG2023/requeriments.txt) file
+5. Install all the dependencies cited in [requirements.txt](../main/requeriments.txt) file
 
