@@ -102,11 +102,16 @@ The main parameters for data sampling are:
 - Acquisition window time interval (AWTI)}: This measure is given in seconds and represents the time interval corresponding to an AW;
 - Number of samples per acquisition window $n_{aw}=16000$: Knowing the previous definitions, $n_{aw} = f_{high} \times \text{AWTI} $.
 
-Figure 2 shows a set of typical waveforms for two consecutive AWs, highlighting the abovementioned parameters. Figure 2a shows in green two consecutive acquisition windows. In seconds, the duration of a particular acquisition window is $AWTI$. Two consecutive AW start=points are separated by an interval of $\Delta t = t_2=t_{ini}$ seconds. In Figure 2a, $AWTI = t_1 - t_{ini}=t_3-t_2$. We also show in figure 2a, in red, an example of the interval $t_{inv}-t_{ini}$ in which the PV inverter is turned on (generating energy). After the instant $t=t_{inv}$, the PV inverter is off (not generating energy). For our example case, in which we show two AW, we have the inverter on (*on* state) in the first AW (left green area) and off (*off* state) in the second AW (right green area ). 
+Figure 2 shows a set of typical waveforms for two consecutive AWs, highlighting the abovementioned parameters. 
 
-Figure 2b shows an example of a set of switching patterns for four relays (switches a, b, c, and d), each controlling an individual appliance. Our hardware controls each switch with a predetermined switching interval. Note that the total time interval showed in Figure 2b is $AWTI$, being Figure 2b a zoomed version of Figure 2a. In figure 2b, we represent each of these switching intervals with different colors: pink for switch a, blue for switch b, yellow for switch c, and grey for switch d.  
+Figure 2a shows in green two consecutive acquisition windows. In green, we show two acquisition windows whose start point is separated by a $\Delta t$ time interval. In red, we show an example of the state transition in PV inverter conditions, from on to off, if $t>t_{inv}$. In seconds, the duration of a particular acquisition window is $AWTI$. Two consecutive AW start=points are separated by an interval of $\Delta t = t_2=t_{ini}$ seconds. In Figure 2a, $AWTI = t_1 - t_{ini}=t_3-t_2$. We also show in Figure 2a, in red, an example of the interval $t_{inv}-t_{ini}$ in which the PV inverter is turned on (generating energy). After the instant $t=t_{inv}$, the PV inverter is off (not generating energy). For our example case, in which we show two AW, we have the inverter on (*on* state) in the first AW (left green area) and off (*off* state) in the second AW (right green area ). 
 
-Figure 2
+Figure 2b shows an example of a set of switching patterns for four relays (switches a, b, c, and d), each controlling an individual appliance. Our hardware controls each switch with a predetermined switching interval. Figure 2b is a detail of the switching patterns inside a particular acquisition window (interval AWTI). We show here four switch states waveforms, each with a different color. Let switch A be the pink waveform, switch B the blue, switch C the yellow, and switch D the grey. Note that the total time interval showed in Figure 2b is $AWTI$, being Figure 2b a zoomed version of Figure 2a. In figure 2b, we represent each of these switching intervals with different colors: pink for switch a, blue for switch b, yellow for switch c, and grey for switch d.  
+
+
+Figure 2a
+
+figure 2b
 
 Our hardware allows us to choose the instants at which each load is triggered within an AW. This flexibility allows us to assemble the load combinations we want. Some possible examples are:
 
