@@ -15,6 +15,8 @@ Click [![HERE](https://img.shields.io/badge/Google%20Drive-Dataset-blue?logo=goo
 
 The Dataset folder has two subfolders: "RAW" and "preprocessed_data". "RAW" contains the original data collected from the sensor boards (SB), with no scaling or any signal processing. "pre_processed_data", on the other hand, contains chunks of each original AW, taken every 1000 consecutive non-changed labels interval of a RAW acquisition window. 
 
+### RAW data folder structure
+
 RAW also has two subfolders: "with_DG" and "without_DG." The "with_DG" subfolder contains acquisition windows taken with the presence of Photovoltaic (PV) Distributed Generation (DG), and the "without_DG" contains acquisition windows only with aggregated loads, without PV DG. 
 
 Below we detail the files for each of these cases:
@@ -23,6 +25,65 @@ Below we detail the files for each of these cases:
 - `./DG-NILM-V1/Dataset/RAW/aggregated/without_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_agg` indicating that it is aggregated raw data, and `without_DG` indicating that this is the case *without* DG
 - `./DG-NILM-V1/Dataset/RAW/individual/with_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_ind` indicating that it is individual raw data, and `with_DG` indicating that this is the case *with* DG
 - `./DG-NILM-V1/Dataset/RAW/individual/without_DG/`: Contains files with the standardized names `raw_agg_with_DG_n`, with `raw_ind` indicating that it is individual raw data, and `without_DG` indicating that this is the case *without* DG
+
+Each RAW aggregated or individual subfolder file contains a matrix with `n_samples = 16000` lines and three columns:
+
+* Each line is one acquisition sample;
+* The first column is an integer number that represents the status (on or off) for each appliance. One can get the binary label of each appliance by simply converting the integer value of the first column to binary;
+* The second column contains the ADC value of the Aggregated Current (`I_agg`);
+* The third column contains the ADC value of the Inverter Current (`I_inv`);
+* One can obtain the Inverter Label by simply considering the condition pointed by the RAW subfolder name, `with_DG` or `without_DG`.
+
+
+#### Detail of the labels applied to each electrical load
+
+We choose four electrical loads of different natures to compose our dataset. We describe the loads chosen in the items below:
+
+- We choose an **electric iron** with a nominal power of 900W. The electric iron is a predominantly linear (resistive) load, prevalent in most residential consumption units, and with relatively high power (above 500W);
+- Single **Phase Induction Motor**: We chose a 0.5hp single-phase motor, with capacitor start. This type of load has a non-linear behavior caused by the magnetic characteristics of the iron and the air gap, resulting in a specific power signature. In Brazilian homes, it is common for this type of load to be used in washing machines that do not use frequency inverters;
+- **Driller + Transformer**: We built an arrangement by connecting a driller Bosch 3601B185D0 with 127V nominal voltage to a single-phase 127V\/220V transformer. The drill has a universal motor (DC motor in series configuration). This arrangement, with a total nominal power of 700W, has a non-linear behavior caused both by the motor action and by the magnetic saturation and in-rush current of the transformer;
+- **Dimmer**: Bearing in mind that more than 70\% of Brazilian homes have an electric shower, that an electric shower is a resistive load, and that the temperature control of these devices is usually carried out employing thyristor switching systems, we build an arrangement of resistive loads commanded by a dimmer. We control the average power delivered to the resistive array through the dimmer firing angle. This adjustment leads to a resistive behavior and adds considerable harmonic content to the residential network.
+
+In this readme file, we consider the following:
+
+- `SW1`: labels for Electrical Iron;
+- `SW2`: labels for Single Phase Induction Motor
+- `SW3`: labels for Driller + Transformer
+- `SW4`: labels for Dimmer
+
+
+#### How to get binary labels from the first column of the RAW `.txt` file
+
+We suggest converting the integer values from the first column of the RAW `.txt` following the code:
+
+```
+y_bin = ["{0:04b}".format(i) for i in labels_out]
+y_bin = np.array(y_bin)
+
+sw1 = np.zeros([y_bin.shape[0]])
+sw2 = np.zeros([y_bin.shape[0]])
+sw3 = np.zeros([y_bin.shape[0]])
+sw4 = np.zeros([y_bin.shape[0]]) 
+
+for k in range(y_bin.shape[0]):
+    sw1[k] = y_bin[k][0]
+    sw2[k] = y_bin[k][1]
+    sw3[k] = y_bin[k][2]
+    sw4[k] = y_bin[k][3]
+```
+where `labels_out` is a column array obtained from the first column of the RAW `.txt` file. 
+
+
+
+### Pre-processed data folder structure
+
+`./DG-NILM-V1/Dataset/pre_processed_data` folder contains four subfolders, each one corresponding to a specific subset an DG presence status:
+
+1. `./DG-NILM-V1/Dataset/pre_processed_data/aggregated_with_DG`: Case with loads overlapping and with DG generation.
+2. `./DG-NILM-V1/Dataset/pre_processed_data/aggregated_without_DG`: Case with loads overlapping and without DG generation.
+3. `./DG-NILM-V1/Dataset/pre_processed_data/individual_with_DG`: Case without loads overlapping and with DG generation.
+4. `./DG-NILM-V1/Dataset/pre_processed_data/individual_without_DG`: Case without loads overlapping and without DG generation. 
+
 
 ### Parameters selection for data sampling
 
@@ -49,13 +110,7 @@ Our hardware allows us to choose the instants at which each load is triggered wi
 ### Electrical appliances choosing
 
 
-We choose four electrical loads of different natures to compose our dataset. We describe the loads chosen in the items below:
 
-
-- We choose an electric iron with a nominal power of 900W. The electric iron is a predominantly linear (resistive) load, prevalent in most residential consumption units, and with relatively high power (above 500W);
-- Single Phase Induction Motor: We chose a 0.5hp single-phase motor, with capacitor start. This type of load has a non-linear behavior caused by the magnetic characteristics of the iron and the air gap, resulting in a specific power signature. In Brazilian homes, it is common for this type of load to be used in washing machines that do not use frequency inverters;
-- Driller + Transformer: We built an arrangement by connecting a driller Bosch 3601B185D0 with 127V nominal voltage to a single-phase 127V\/220V transformer. The drill has a universal motor (DC motor in series configuration). This arrangement, with a total nominal power of 700W, has a non-linear behavior caused both by the motor action and by the magnetic saturation and in-rush current of the transformer;
-- Dimmer: Bearing in mind that more than 70\% of Brazilian homes have an electric shower, that an electric shower is a resistive load, and that the temperature control of these devices is usually carried out employing thyristor switching systems, we build an arrangement of resistive loads commanded by a dimmer. We control the average power delivered to the resistive array through the dimmer firing angle. This adjustment leads to a resistive behavior and adds considerable harmonic content to the residential network.
 
 
 
