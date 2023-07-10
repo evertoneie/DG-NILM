@@ -122,3 +122,12 @@ Our hardware allows us to choose the instants at which each load is triggered wi
 - Aggregate triggering with fixed intervals (TFI):} In this case, we choose fixed switching intervals and always start at the exact times for all switches with overlapping loads;
 - Aggregate triggering with a finite set of different intervals (TDI):} In this case, we choose a finite set of switching patterns for the relays, generating a finite set of different switching patterns for different AWs;
 - Aggregate triggering with a random set of different intervals (TRI):} In this case, we choose a random switching pattern for each load, and there is an infinite set of possible combinations between these patterns, generating all AW with different switching patterns.
+
+## Experiments with DG-NILM dataset
+
+This section concerns the results submitted as a paper to the IEEE Transactions on Smart Grids journal in August 2023. All scripts and implementation details can be found in the branch [Access TSG2023 Branch](../TSG2023/). Esse branch possui as pastas ` [Methods](../TSG2023/Methods) and [auxiliar_scripts](../TSG2023/auxiliar_scripts)
+
+
+We prepared three classification experiments with DG-NILM-V1: *Inverter Detection Experiment* (IDE), *Loads Detection Experiment* (LDE), and *Loads and Inverter Detection Experiment* (LIDE), with different frameworks. For LDE and LIDE, we use multi-label binary classification. For IDE, we use binary classification. The purpose of LDE is to disaggregate and classify the electrical loads aggregated in `I_agg` into scenarios *with* and *without* the DG presence. The purpose of LIDE is to disaggregate and classify both the electrical loads and the presence of the inverter in the aggregated *I_agg* signal. Finally, IDE aims to identify and classify the presence of distributed generation in the aggregate signal *I_agg*.
+
+
