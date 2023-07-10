@@ -77,7 +77,7 @@ where `labels_out` is a column array obtained from the first column of the RAW `
 
 ### Pre-processed data folder structure
 
-`./DG-NILM-V1/Dataset/pre_processed_data` folder contains four subfolders, each one corresponding to a specific subset an DG presence status:
+`./DG-NILM-V1/Dataset/pre_processed_data` folder contains four subfolders, each one corresponding to a specific subset of a DG presence status:
 
 1. `./DG-NILM-V1/Dataset/pre_processed_data/aggregated_with_DG`: Case with loads overlapping and with DG generation.
 2. `./DG-NILM-V1/Dataset/pre_processed_data/aggregated_without_DG`: Case with loads overlapping and without DG generation.
@@ -85,6 +85,13 @@ where `labels_out` is a column array obtained from the first column of the RAW `
 4. `./DG-NILM-V1/Dataset/pre_processed_data/individual_without_DG`: Case without loads overlapping and without DG generation. 
 
 Each of the folders `1-4` above contains two files: `i1_out_entire.hdf5` and `i2_out_entire.hdf5`. `i1_out_entire.hdf5` and `i2_out_entire.hdf5` contains chunks of 1000 continuous non-changed labels samples obtained from RAW data. We use THIS notebook to pre-process the RAW data and obtain such chunks. `i1_out_entire.hdf5` contains the *aggregated* chunks and `i2_out_entire.hdf5` contains the *inverter* chunks.
+
+### Scale factor to convert RAW data to real-world values
+
+RAW data values are at the range `0-10^12`, corresponding to the ADC's 12 bits resolution. To get real-world-ranged current variables, one must remove the offset (the half of `10^12`) and multiply the result by the *scaler* value.
+
+- *Scaler* for `I_agg`: `k_agg = 0.036450093058151`
+- *Scaler* for `I_inv`: `k_inv = 0.018739120738522`
 
 ### Parameters selection for data sampling
 
