@@ -125,19 +125,19 @@ Our hardware allows us to choose the instants at which each load is triggered wi
 
 ## Experiments with DG-NILM dataset
 
-This section concerns the results submitted as a paper to the IEEE Transactions on Smart Grids journal in August 2023. All scripts and implementation details are in the branch [Access TSG2023 Branch](../TSG2023/). This branch has folders ` [Methods](../TSG2023/Methods) and [auxiliar_scripts](../TSG2023/auxiliar_scripts).
+This section concerns the results submitted as a paper to the Journal of Control, Automation and Electrical Systems, in October 2024. All scripts and implementation details are in the branch [Access JCAES2024 Branch](../JCAES2024/). This branch has folders ` [Methods](../JCAES2024/Methods) and [auxiliar_scripts](../JCAES2024/auxiliar_scripts).
 
 
 
 We prepared three classification experiments with DG-NILM-V1: *Inverter Detection Experiment* (IDE), *Loads Detection Experiment* (LDE), and *Loads and Inverter Detection Experiment* (LIDE), with different frameworks. For LDE and LIDE, we use multi-label binary classification. For IDE, we use binary classification. The purpose of LDE is to disaggregate and classify the electrical loads aggregated in `I_agg` into scenarios *with* and *without* the DG presence. The purpose of LIDE is to disaggregate and classify both the electrical loads and the presence of the inverter in the aggregated *I_agg* signal. Finally, IDE aims to identify and classify the presence of distributed generation in the aggregate signal *I_agg*.
 
-[Methods](../TSG2023/Methods) folder contains the implementations of IDE, LIDE, and LDE considering four state-of-the-art approaches: Sequencer [1], InceptionTime [2], DeepDFML [3] and ST-NILM [4]. We use [TSAI](https://github.com/timeseriesAI/tsai) to implement Sequencer and Inception, [this repository](https://github.com/LucasNolasco/DeepDFML-NILM) to implement DeepDFML and [this repository](https://github.com/LucasNolasco/ST-NILM) to implement ST-NILM.
+[Methods](../JCAES2024/Methods) folder contains the implementations of IDE, LIDE, and LDE considering four state-of-the-art approaches: Sequencer [1], InceptionTime [2], DeepDFML [3] and ST-NILM [4]. We use [TSAI](https://github.com/timeseriesAI/tsai) to implement Sequencer and Inception, [this repository](https://github.com/LucasNolasco/DeepDFML-NILM) to implement DeepDFML and [this repository](https://github.com/LucasNolasco/ST-NILM) to implement ST-NILM.
 
 Before reproducing the experiments LDE, LIDE, and IDE, please follow these steps:
 
-1. First, [download the branch](../TSG2023/) and extract the content;
+1. First, [download the branch](../JCAES2024/) and extract the content;
 2. Download the segments [through the link](https://drive.google.com/drive/folders/11wv6WqpKKDCWrLOa3dBvuqClEdCyC2KZ?usp=sharing);
-3. Place the segments folder into the TST2023 branch root folder;
+3. Place the segments folder into the JCAES2024 branch root folder;
 4. Verify and adequate all the addresses pointing to the segments;
 5. Install all the dependencies cited in [requirements.txt](../main/requirements.txt) file
 
